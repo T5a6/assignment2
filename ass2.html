@@ -68,13 +68,13 @@
                 const tableBody = document.getElementById('data-body'); // Gets the table body element by its ID
                 data.records.forEach(record => { // Iterates over each record in the fetched data
                     const row = document.createElement('tr'); // Creates a new table row for each record
-                    row.innerHTML = ` <!-- Sets the inner HTML of the row with data -->
-                        <td>${record.fields.year}</td> <!-- Year data cell -->
-                        <td>${record.fields.semester}</td> <!-- Semester data cell -->
-                        <td>${record.fields.the_programs}</td> <!-- Programs data cell -->
-                        <td>${record.fields.nationality}</td> <!-- Nationality data cell -->
-                        <td>${record.fields.colleges}</td> <!-- Colleges data cell -->
-                        <td>${record.fields.number_of_students}</td> <!-- Number of Students data cell -->
+                    row.innerHTML = ` //Sets the inner HTML of the row with data
+                        <td>${record.fields.year}</td> // Year data cell 
+                        <td>${record.fields.semester}</td> //Semester data cell
+                        <td>${record.fields.the_programs}</td> //Programs data cell 
+                        <td>${record.fields.nationality}</td> //Nationality data cell 
+                        <td>${record.fields.colleges}</td> //Colleges data cell 
+                        <td>${record.fields.number_of_students}</td> //Number of Students data cell 
                     `;
                     tableBody.appendChild(row); // Appends the new row to the table body
                 });
