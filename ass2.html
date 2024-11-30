@@ -3,19 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--Pico css --> 
     <title>Student Enrollment Data</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+
 </head>
+<style>
+    table {
+    width: 100%;
+    border-collapse: collapse; /* Ensures borders are combined */
+    margin: 20px 0;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+}
+
+/* Table header styling */
+th {
+    background-color: white; /* Light gray background for header */
+    color: #343a40; /* Darker text color */
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 2px solid #c2c0bf; /* Bottom border for header */
+}
+
+/* Table cell styling */
+td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #dfdddc; /* Bottom border for cells */
+}
+
+/* Hover effect for table rows */
+tr:hover {
+    background-color: #f1f1f1; /* Light hover effect */
+}
+
+/* Alternating row colors */
+tr:nth-child(odd) {
+    background-color: #f2f2f2; /* light gray for odd rows */
+}
+
+tr:nth-child(even) {
+    background-color: white; /* white for even rows */
+}
+
+</style>
 <body>
-  <!-- Begins the body of the document, where the content will be displayed -->
-
+  
     <table id="data-table">
-
         <thead>
             <tr>
-                            <!-- Starts a table row -->
-
                 <th>Year</th>
                 <th>Semester</th>
                 <th>The Programs</th>
@@ -25,22 +59,16 @@
             </tr>
         </thead>
         <tbody id="data-body">
-             <!-- Defines the body section of the table where data rows will be inserted -->
         </tbody>
     </table>
 
     <script>
         fetch('https://data.gov.bh/api/records/1.0/search/?dataset=01-statistics-of-students-nationalities_updated&rows=100&sort=number_of_students')
-              <!-- Uses the Fetch API to get data from a specified URL -->
             .then(response => response.json())
-                        <!-- Converts the response to JSON format -->
             .then(data => {
                 const tableBody = document.getElementById('data-body');
-                                // Gets the table body element by its ID for data insertion
                 data.records.forEach(record => {
-                                    // Iterates over each record in the fetched data
                     const row = document.createElement('tr');
-                                        // Creates a new table row for each record
                     row.innerHTML = `
                         <td>${record.fields.year}</td>
                         <td>${record.fields.semester}</td>
@@ -50,7 +78,6 @@
                         <td>${record.fields.number_of_students}</td>
                     `;
                     tableBody.appendChild(row);
-                                        // Appends the new row to the table body
                 });
             });
     </script>
