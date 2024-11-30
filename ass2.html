@@ -1,83 +1,82 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html> 
+<html lang="en"> 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Enrollment Data</title>
-
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Student Enrollment Data</title> <!-- Sets the title of the web page -->
 </head>
 <style>
     table {
-    width: 100%;
-    border-collapse: collapse; /* Ensures borders are combined */
-    margin: 20px 0;
-    font-size: 16px;
-    font-family: Arial, sans-serif;
-}
+        width: 100%; /* Makes the table take the full width of the container */
+        border-collapse: collapse; /* Ensures borders are combined for a clean look */
+        margin: 20px 0; /* Adds margin above and below the table */
+        font-size: 16px; /* Sets the font size for the table text */
+        font-family: Arial, sans-serif; /* Sets the font family for the table text */
+    }
 
-/* Table header styling */
-th {
-    background-color: white; /* Light gray background for header */
-    color: #343a40; /* Darker text color */
-    padding: 12px 15px;
-    text-align: left;
-    border-bottom: 2px solid #c2c0bf; /* Bottom border for header */
-}
+    /* Table header styling */
+    th {
+        background-color: white; /* Sets the background color for header cells */
+        color: #343a40; /* Sets the text color for header cells */
+        padding: 12px 15px; /* Adds padding around header cell content */
+        text-align: left; /* Aligns text to the left in header cells */
+        border-bottom: 2px solid #c2c0bf; /* Adds a bottom border to header cells */
+    }
 
-/* Table cell styling */
-td {
-    padding: 12px 15px;
-    border-bottom: 1px solid #dfdddc; /* Bottom border for cells */
-}
+    /* Table cell styling */
+    td {
+        padding: 12px 15px; /* Adds padding around table cell content */
+        border-bottom: 1px solid #dfdddc; /* Adds a bottom border to table cells */
+    }
 
-/* Hover effect for table rows */
-tr:hover {
-    background-color: #f1f1f1; /* Light hover effect */
-}
+    /* Hover effect for table rows */
+    tr:hover {
+        background-color: #f1f1f1; /* Changes background color on hover for rows */
+    }
 
-/* Alternating row colors */
-tr:nth-child(odd) {
-    background-color: #f2f2f2; /* light gray for odd rows */
-}
+    /* Alternating row colors */
+    tr:nth-child(odd) {
+        background-color: #f2f2f2; /* Sets light gray background for odd rows */
+    }
 
-tr:nth-child(even) {
-    background-color: white; /* white for even rows */
-}
-
+    tr:nth-child(even) {
+        background-color: white; /* Sets white background for even rows */
+    }
 </style>
 <body>
   
-    <table id="data-table">
-        <thead>
-            <tr>
-                <th>Year</th>
-                <th>Semester</th>
-                <th>The Programs</th>
-                <th>Nationality</th>
-                <th>Colleges</th>
-                <th>Number of Students:</th>
+    <table id="data-table"> <!-- Starts the table with an ID for referencing -->
+        <thead> <!-- Defines the header section of the table -->
+            <tr> <!-- Starts a table row for header cells -->
+                <th>Year</th> <!-- Column header for Year -->
+                <th>Semester</th> <!-- Column header for Semester -->
+                <th>The Programs</th> <!-- Column header for Programs -->
+                <th>Nationality</th> <!-- Column header for Nationality -->
+                <th>Colleges</th> <!-- Column header for Colleges -->
+                <th>Number of Students:</th> <!-- Column header for Number of Students -->
             </tr>
         </thead>
-        <tbody id="data-body">
+        <tbody id="data-body"> <!-- Defines the body section of the table where data will be inserted -->
         </tbody>
     </table>
 
     <script>
+        // Fetches data from the specified API endpoint
         fetch('https://data.gov.bh/api/records/1.0/search/?dataset=01-statistics-of-students-nationalities_updated&rows=100&sort=number_of_students')
-            .then(response => response.json())
+            .then(response => response.json()) // Converts the response to JSON format
             .then(data => {
-                const tableBody = document.getElementById('data-body');
-                data.records.forEach(record => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${record.fields.year}</td>
-                        <td>${record.fields.semester}</td>
-                        <td>${record.fields.the_programs}</td>
-                        <td>${record.fields.nationality}</td>
-                        <td>${record.fields.colleges}</td>
-                        <td>${record.fields.number_of_students}</td>
+                const tableBody = document.getElementById('data-body'); // Gets the table body element by its ID
+                data.records.forEach(record => { // Iterates over each record in the fetched data
+                    const row = document.createElement('tr'); // Creates a new table row for each record
+                    row.innerHTML = ` <!-- Sets the inner HTML of the row with data -->
+                        <td>${record.fields.year}</td> <!-- Year data cell -->
+                        <td>${record.fields.semester}</td> <!-- Semester data cell -->
+                        <td>${record.fields.the_programs}</td> <!-- Programs data cell -->
+                        <td>${record.fields.nationality}</td> <!-- Nationality data cell -->
+                        <td>${record.fields.colleges}</td> <!-- Colleges data cell -->
+                        <td>${record.fields.number_of_students}</td> <!-- Number of Students data cell -->
                     `;
-                    tableBody.appendChild(row);
+                    tableBody.appendChild(row); // Appends the new row to the table body
                 });
             });
     </script>
