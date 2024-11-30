@@ -1,16 +1,24 @@
 <?php
-$URL = "https://data.gov.bh/api/explore/v2.1/catalog/datasets/01-statistics-of-students-nationalities_updated/records?where=colleges%20like%20%22IT%22%20AND%20the_programs%20like%20%22bachelor%22&limit=100";
+$url = 'https://data.gov.bh/explore/dataset/01-statistics-of-students-nationalities_updated/table/?disjunctive.year&disjunctive.semester&disjunctive.the_programs&sort=number_of_students';
+//url of the data set
+$result = file_get_contents($url);
+//retrieve the content of the url
+$response = json_decode($result, true);
+//converts the json to php
 
-$response = file_get_contents($URL);
-if ($response == false) {
-    echo "Cannot fetch the data from the spacified URL";
-    exit;}
+if ($response === false) {  // check if the data was fetched successfully
+    echo "Cannot fetch the data from the specified URL"; // when fetch fails, error message appears
+    exit; // stop execution 
+}
 
-$result = json_decode($response, true);
-
-if (isset($result['records']) && !empty($result)) {
-
-    echo "<!DOCTYPE html> <html> <head>";
-    echo "<meta charset='utf-8'> <meta name='viewport' content='width=device-width, initial-scale=1.0'>"; 
-    echo "<title>University of Bahrain Students Enrollment by Nationality</title>"; 
-    echo "</head>"; }
+$data = $response['records'];
+//extract the data 'records' from the data set to be dealed with element by element
+foreach ($data as $row) { //loop that will extract each row and save it in the spacified array that will be executed
+    $year[] = $row['year'];
+    $semester[] = $row['semester'];
+    $programs[] = $row['the_programs'];
+    $nationality[] = $row['nationality'];
+    $colleges[] = $row['colleges'];
+    $number_of_students[] = $row['number_of_students'];
+}
+?>
